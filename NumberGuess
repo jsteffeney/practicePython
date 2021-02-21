@@ -1,0 +1,37 @@
+"""This program is a guessing game comparing a pair of rolled dice against a guess from the user"""
+#import necessary libraries
+from random import randint
+from time import sleep
+
+#create function to get user input
+def get_user_guess():
+  guess = int(raw_input("Enter your guess: "))
+  return guess
+
+#create function to roll the dice and check to see who wins the game
+def roll_dice(number_of_sides):
+  first_roll = randint(1, number_of_sides) #get random integer for roll1
+  second_roll = randint(1, number_of_sides) #get random int for roll2
+  max_val = number_of_sides * 2 #find the max value of the roll
+  print "The maximum value of the roll is: %d" % max_val #print max value
+  guess = get_user_guess()
+
+  #make sure the guess is valid and then simulate rolling and find total
+  if guess > max_val:
+    print "Your guess exceeds the maximum value of the dice roll"
+  else:
+    print "Rolling..."
+    sleep(2)
+    print "The first die rolled: %d" % first_roll
+    sleep(1)
+    print "The second die rolled: %d" % second_roll
+    sleep(1)
+    total_roll = first_roll + second_roll
+    print "Total roll of the dice is: %d" % total_roll
+
+    if guess == total_roll:
+      print "You won this round!!"
+    else:
+      print "Sorry, it looks like I won this time!"
+
+roll_dice(6)
