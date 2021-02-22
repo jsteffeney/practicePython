@@ -1,0 +1,81 @@
+"""This program is a command line calendar that allows the user to display, create, update or delete an event"""
+
+from time import sleep, strftime
+NAME = "Jordan"
+
+#define calendar dictionary
+calendar = {
+
+}
+
+#create welcome message for calendar
+def welcome():
+  print "Hello " + NAME + " Welcome to your Calender!"
+  print "We are now loading your Calendar!"
+  sleep(1)
+  strftime("%A, %b %d, %Y")
+  strftime("%H:%M:%S")
+  sleep(1)
+  print "What you you like to do?"
+
+#run the calendar as long as the user does not choose to exit
+def start_calendar():
+  welcome()
+  start = True
+
+#determin user input and execute it
+  while start == True: #runs the program until exited
+    #takes user input
+    user_choice = raw_input("Select A to Add, U to update, V to view, D to delete, or X to exit.")
+    user_choice = user_choice.upper() #converts to uppercase
+    #displays calendar if user chooses view
+    if user_choice == "V":
+      if len(calendar.keys()) < 1: #displays message below if calendar is empty
+        print "Sorry there are no events to display."
+      else:
+        print calendar #prints calendar if there are entries
+    #take input from user to update calendar if update is selected
+    elif user_choice == "U":
+      date = raw_input("What date? ")
+      update = raw_input("Enter the update: ")
+      calendar[date] = update #updates calendar
+      print "Your update has been completed"
+      print calendar
+    #allows user to add an event
+    elif user_choice == "A":
+      #stores event input from user
+      event = raw_input("Enter the event: ")
+      #stores date input from user
+      date = raw_input("Enter date (MM/DD/YYYY)")
+        #tests date entered to make sure it is the appropriate format
+      if len(date) > 10 or int(date[6:11:1]) < int(strftime("%Y")):
+        #displays below messages if not correct format
+        print "Invalid date has been selected"
+        try_again = raw_input("Try Again? Y for Yes, N for No: ")
+        try_again = try_again.upper()
+        #allows the program to continue running if "Y" is selected
+        if try_again == "Y":
+          continue
+        else:
+          start = False
+      else: 
+        calendar[date] = event
+        print "Your event has been added to the Calendar"
+    elif user_choice == "D":
+      if len(calendar.keys()) < 1:
+        print "The Calendar is empty, there are no items to delete"
+      else:
+        event = raw_input("What event? ")
+        for date in calendar.keys():
+          if event == calendar[date]:
+            del calendar[date]
+            print "The event was removed from your calendar"
+            print calendar
+          else:
+            print "no such event exists"
+    elif user_choice == "X":
+      start = False
+    else:
+      print "That command was invalid"
+
+start_calendar()
