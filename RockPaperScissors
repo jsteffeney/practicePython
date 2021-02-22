@@ -1,0 +1,38 @@
+"""This is rock paper scissors"""
+from random import randint #import random int
+options = ["ROCK", "PAPER", "SCISSORS"] #list of choices
+
+#dictionary for display messages
+message = {
+  "tie" : "Yawn it's a tie!",
+  "won" : "Yay you won!",
+  "lost" : "Aww you lost!"
+}
+
+#function for finding who won
+def decide_winner(user_choice, computer_choice):
+  print "Your choice was: %s" % user_choice
+  print "The computer chose: %s" % computer_choice
+
+  if user_choice == computer_choice:
+    print message["tie"]
+  elif user_choice == options[0] and computer_choice == options[2]:
+    print message["won"]
+  elif user_choice == options[1] and computer_choice == options[0]:
+    print message["won"]
+  elif user_choice == options[2] and computer_choice == options[1]:
+    print message["won"]
+  else:
+    print message["lost"]
+
+"""starts the game, gets input from the user, converts to uppercase, finds computer choice, calls decide_winner function""" 
+def play_RPS():
+  user_choice = raw_input("Enter Rock, Paper, or Scissors: ")
+  user_choice = user_choice.upper()
+
+  computer_choice = options[randint(0, 2)]
+  
+
+  decide_winner(user_choice, computer_choice)
+
+play_RPS()
