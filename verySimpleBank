@@ -1,0 +1,44 @@
+"""This program creates a bank account"""
+class BankAccount(object):
+  balance = 0
+#define the initialization of name
+  def __init__(self, name):
+    self.name = name
+#define representative account and balance
+  def __repr__(self):
+    return "This is %s's Account. Balance: $%.2f" % (self.name, self.balance)
+  #this method displays balance
+  def show_balance(self):
+    print "Balance: $%.2f" % (self.balance)
+  #take a deposit and if valid add to balance
+  def deposit(self, amount):
+    if amount <= 0:
+      print "You selected to deposit $0.00, please try again."
+      return
+    else:
+      print "You deposited: $%.2f" % (amount)
+      self.balance += amount
+      self.show_balance()
+  
+  #allow a withdrawal if the withdrawal does not exceed balance
+  def withdraw(self, amount):
+    if amount > self.balance:
+      print "Your withdrawal exceeds your balance amount. Please try again."
+      return
+    else:
+      print "Your withdrawal is: $%.2f" % (amount)
+      self.balance -= amount
+      self.show_balance()
+
+
+my_account = BankAccount("John")
+
+print my_account.__repr__()
+
+my_account.show_balance()
+
+my_account.deposit(2000)
+
+my_account.withdraw(1000)
+
+print my_account.__repr__()
